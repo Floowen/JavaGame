@@ -1,77 +1,135 @@
 package main;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.Random;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
+import static utils.Constants.PlayerConstants.*;
+import static utils.Constants.Directions.*;
+
 public class GamePanel extends JPanel{
 	
 	private MouseInputs mouseInputs;
 	private float xDelta = 100, yDelta = 100; //game object coordinates
-	private float xDir = 1f, yDir = 1f;
-	private int frames = 0;
-	private long lastCheck = 0;
-	private Color color = new Color(12, 90, 112); //default color
-	private Random random;
+	private BufferedImage img;
+	private BufferedImage[][] animations;
+	private int animTick, animIndex, animSpeed = 15;
+	
+	private int playerAction = IDLE;
+	private int playerDir = -1;
+	private boolean moving = false;
 	
 	//Constructor
 	public GamePanel() {
-		random = new Random();
 		mouseInputs = new MouseInputs(this); //initializes mouse input listener
 		
+		importImg(); //imports sprite
+		loadAnimations();
+		
+		setPanelSize();
 		addKeyListener(new KeyboardInputs(this));
 		addMouseListener(mouseInputs);
 		addMouseMotionListener(mouseInputs);
 		
 	}
 	
-	public void changeXDelta(int value) {
-		this.xDelta += value;
+	private void loadAnimations() {
+		animations = new BufferedImage[9][6];
+		
+		for (int j = 0; j < animations.length; j++) {
+			for (int i = 0; i < animations[j].length; i++) {
+				animations[j][i] = img.getSubimage(i*64, j*40, 64, 40);
+			}
+		}
+	}
+
+	private void importImg() {
+		InputStream is = getClass().getResourceAsStream("/player_sprites.png");
+		
+		try {
+			img = ImageIO.read(is);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void setPanelSize() {
+		Dimension size = new Dimension(1280, 800);
+		setMinimumSize(size);
+		setPreferredSize(size);
 	}
 	
-	public void changeYDelta(int value) {
-		this.yDelta += value;
+	public void setDirection(int direction) {
+		this.playerDir = direction;
+		moving = true;
 	}
 	
-	public void setRectPos(int x, int y) {
-		this.xDelta = x;
-		this.yDelta = y;
+	public void setMoving(boolean moving) {
+		this.moving = moving;
 	}
 	
-	public void paintComponent(Graphics g) {
+	private void updateAnimationTick() { //plays the animation
+		animTick++;
+		if (animTick >= animSpeed) {
+			animTick = 0;
+			animIndex++;
+			if (animIndex >= getSpriteAmount(playerAction)) {
+				animIndex = 0;
+			}
+		}
+		
+	}
+	
+	private void setAnimation() {
+		if (moving) 
+			playerAction = RUNNING;
+		else
+			playerAction = IDLE;
+		
+	}
+	
+	private void updatePos() {
+		if (moving) {
+			switch(playerDir) {
+			case LEFT:
+				xDelta -= 3;
+				break;
+			case UP:
+				yDelta -= 3;
+				break;
+			case RIGHT:
+				xDelta += 3;
+				break;
+			case DOWN:
+				yDelta += 3;
+				break;
+			}
+		}
+		
+	}
+	
+	public void paintComponent(Graphics g) { //all things frame related
 		super.paintComponent(g); //initiates the frame
+		updateAnimationTick();
 		
-		updateRectangle();
-		g.setColor(color);
-		g.fillRect((int)xDelta, (int)yDelta, 200, 50);
+		setAnimation();
+		updatePos();
 		
-		
-	}
-
-	private void updateRectangle() { //prevents rectangle going out of bounds
-		xDelta += xDir;
-		if (xDelta > 400 || xDelta < 0) {
-			xDir *= -1;
-			color = getRandomColor();
-		}
-		
-		yDelta += yDir;
-		if (yDelta > 400 || yDelta < 0) {
-			yDir *= -1;
-			color = getRandomColor();
-		}
-		
-	}
-
-	private Color getRandomColor() {
-		int r = random.nextInt(255), g = random.nextInt(255), b = random.nextInt(255);
-		System.out.println("Color Changed!");
-		return new Color(r, g, b);
+		g.drawImage(animations[playerAction][animIndex], (int)xDelta, (int)yDelta, 256, 160, null); //draws image|sprite
 	}
 	
 }

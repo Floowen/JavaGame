@@ -15,6 +15,7 @@ public class Game implements Runnable{
 		
 	}
 	
+	//Starts Game loop
 	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
@@ -34,7 +35,7 @@ public class Game implements Runnable{
 		while (true) { 
 			now = System.nanoTime();
 			if (now - lastFrame >= timePerFrame) {
-				gamePanel.repaint();
+				gamePanel.repaint(); //refreshes the frame
 				lastFrame = now;
 				frames++;
 			}
