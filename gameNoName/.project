@@ -14,23 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/level_one_data.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/level_one_data.png</locationURI>
-		</link>
-		<link>
-			<name>res/outside_sprites.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/outside_sprites.png</locationURI>
-		</link>
-		<link>
-			<name>res/player_sprites.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/player_sprites.png</locationURI>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1697465837996</id>
