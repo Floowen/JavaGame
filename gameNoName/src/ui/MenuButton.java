@@ -17,8 +17,8 @@ public class MenuButton {
 	private Rectangle bounds;
 	
 	public MenuButton(int xPos, int yPos, int rowIndex, Gamestate state) {
-		this.xPos = x.Pos;
-		this.yPos = y.Pos;
+		this.xPos = xPos;
+		this.yPos = yPos;
 		this.rowIndex = rowIndex;
 		this.state = state;
 		loadImgs();
@@ -33,7 +33,7 @@ public class MenuButton {
 		imgs = new BufferedImage[3];
 		BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.MENU_BUTTONS);
 		for(int i = 0; i < imgs.length; i++)
-			imgs[i] = temp.getSubimage(i * B_WIDTH_DEFAULT, rowIndes * B_HEIGHT_DEFAULT, B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT);
+			imgs[i] = temp.getSubimage(i * B_WIDTH_DEFAULT, rowIndex * B_HEIGHT_DEFAULT, B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT);
 		
 	}
 	

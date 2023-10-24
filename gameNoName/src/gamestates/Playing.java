@@ -11,7 +11,7 @@ import main.Game;
 public class Playing extends State implements Statemethods{
 	private Player player;
 	private LevelManager levelManager;
-	
+
 	public Playing(Game game) {
 		super(game);
 		initClasses();
@@ -60,7 +60,7 @@ public class Playing extends State implements Statemethods{
 	}
 
 	@Override
-	public void mouseMoved(KeyEvent e) {
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

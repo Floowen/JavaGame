@@ -1,6 +1,6 @@
-/ui/
-/utils/
 /gamestates/
 /inputs/
-/main/
-/entities/
+/utils/
+/ui/
+/button_atlas.png
+/menu_background.png
