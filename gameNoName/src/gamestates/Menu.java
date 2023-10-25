@@ -59,7 +59,7 @@ public class Menu extends State implements Statemethods{
 	public void mousePressed(MouseEvent e) {
 		for(MenuButton mb : buttons)
 			if(isIn(e,mb)) {
-				mb.setMouseOver(true);
+				mb.setMousePressed(true);
 				break;
 			}
 	}
