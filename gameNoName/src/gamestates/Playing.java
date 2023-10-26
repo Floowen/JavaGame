@@ -7,10 +7,13 @@ import java.awt.event.MouseEvent;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
+import ui.PauseOverlay;
 
 public class Playing extends State implements Statemethods{
 	private Player player;
 	private LevelManager levelManager;
+	private PauseOverlay pauseOverlay;
+	private boolean paused = true;
 
 	public Playing(Game game) {
 		super(game);
@@ -22,6 +25,7 @@ public class Playing extends State implements Statemethods{
 		levelManager = new LevelManager(game);
 		player = new Player(200, 200, (int) (64 * game.SCALE), (int) (40 * game.SCALE));
 		player.loadlvlData(levelManager.getCurrentLevel().getLevelData());
+		pauseOverlay = new PauseOverlay();
 	
 	}
 	
@@ -30,6 +34,7 @@ public class Playing extends State implements Statemethods{
 		levelManager.update();
 		player.update();
 		
+		pauseOverlay.update();
 	}
 
 	@Override
@@ -37,6 +42,7 @@ public class Playing extends State implements Statemethods{
 		levelManager.draw(g);
 		player.render(g);
 		
+		pauseOverlay.draw(g);
 	}
 
 	@Override
@@ -47,21 +53,22 @@ public class Playing extends State implements Statemethods{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1)
-			player.setAttacking(true);
-		
+		if (paused)
+			pauseOverlay.mousePressed(e);
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (paused)
+			pauseOverlay.mouseReleased(e);
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (paused)
+			pauseOverlay.mouseMoved(e);
 		
 	}
 
@@ -77,8 +84,18 @@ public class Playing extends State implements Statemethods{
 		case KeyEvent.VK_SPACE:
 			player.setJump(true);
 			break;
+		case KeyEvent.VK_LEFT:
+			player.setLeft(true);
+			break;
+		case KeyEvent.VK_RIGHT:
+			player.setRight(true);
+			break;
+		case KeyEvent.VK_UP:
+			player.setJump(true);
+			break;
 		case KeyEvent.VK_ESCAPE:
 			Gamestate.state = Gamestate.MENU;
+			break;
 		}
 	}
 
@@ -90,6 +107,15 @@ public class Playing extends State implements Statemethods{
 			break;
 		case KeyEvent.VK_D:
 			player.setRight(false);
+			break;
+		case KeyEvent.VK_LEFT:
+			player.setLeft(false);
+			break;
+		case KeyEvent.VK_RIGHT:
+			player.setRight(false);
+			break;
+		case KeyEvent.VK_UP:
+			player.setJump(false);
 			break;
 		case KeyEvent.VK_SPACE:
 			player.setJump(false);

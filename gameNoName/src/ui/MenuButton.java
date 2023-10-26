@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
 import utils.LoadSave;
-import static utils.Constants.UI.Button.*;
+import static utils.Constants.UI.Buttons.*;
 
 public class MenuButton {
 	private int xPos, yPos, rowIndex, index;
