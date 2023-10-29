@@ -13,7 +13,6 @@ public class LoadSave {
 
 	public static final String PLAYER_ATLAS = "player_sprites.png";
 	public static final String LEVEL_ATLAS = "outside_sprites.png";
-//	public static final String LEVEL_ONE_DATA = "level_one_data.png";
 	public static final String LEVEL_ONE_DATA = "level_one_data_long.png";
 	public static final String MENU_BUTTONS = "button_atlas.png";
 	public static final String MENU_BACKGROUND = "menu_background.png";
@@ -22,6 +21,9 @@ public class LoadSave {
 	public static final String SOUND_BUTTONS = "sound_button.png";
 	public static final String URM_BUTTONS = "urm_buttons.png";
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
+	public static final String PLAYING_BG_IMG = "playing_bg_img.png";
+	public static final String BIG_CLOUDS = "big_clouds.png";
+	public static final String SMALL_CLOUDS = "small_clouds.png";
 	
 	public static BufferedImage getSpriteAtlas(String fileName) {
 		BufferedImage img = null;
