@@ -1,9 +1,7 @@
-/level_one_data_long.png
-/utils/
 /entities/
+/utils/
 /gamestates/
+/inputs/
 /levels/
-/background_menu.png
-/playing_bg_img.png
-/big_clouds.png
-/small_clouds.png
+/main/
+/ui/
