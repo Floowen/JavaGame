@@ -1,17 +1,13 @@
 package entities;
 
-import static utils.Constants.Directions.*;
 import static utils.Constants.PlayerConstants.*;
 import static utils.HelpMethods.*;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
 
 import gamestates.Playing;
 import main.Game;
@@ -69,6 +65,13 @@ public class Player extends Entity{
 		initAttackBox();
 	}
 
+	public void setSpawn(Point spawn) {
+		this.x = spawn.x;
+		this.y = spawn.y;
+		hitbox.x = x;
+		hitbox.y = y;
+	}
+	
 	private void initAttackBox() {
 		attackBox = new Rectangle2D.Float(x, y, (int) (40 * Game.SCALE), (int) (20 * Game.SCALE));
 		

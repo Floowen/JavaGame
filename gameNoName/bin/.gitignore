@@ -1,6 +1,7 @@
-/health_power_bar.png
 /utils/
 /entities/
-/player_sprites.png
-/gamestates/
 /ui/
+/main/
+/gamestates/
+/lvls/
+/levels/
