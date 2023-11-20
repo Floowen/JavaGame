@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import entities.Crabby;
 import main.Game;
 
-import static utils.HelpMethods.getLevelData;
+import static utils.HelpMethods.GetLevelData;
 import static utils.HelpMethods.GetCrabs;
 import static utils.HelpMethods.GetPlayerSpawn;
 

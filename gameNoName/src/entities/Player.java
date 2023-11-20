@@ -255,6 +255,10 @@ public class Player extends Entity{
 		}
 
 	}
+	
+	public void changePower(int value) {
+		System.out.println("Added power!");
+	}
 
 	private void loadAnimations() {
 		
