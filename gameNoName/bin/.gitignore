@@ -1,5 +1,9 @@
-/objects/
-/utils/
-/entities/
 /levels/
+/utils/
+/objects/
 /gamestates/
+/level_one_data.png
+/level_one_data_long.png
+/objects_sprites.png
+/potions_sprites.png
+/entities/
