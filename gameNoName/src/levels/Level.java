@@ -8,6 +8,7 @@ import entities.Crabby;
 import main.Game;
 import objects.GameContainer;
 import objects.Potion;
+import objects.Spike;
 import utils.HelpMethods;
 
 import static utils.HelpMethods.GetLevelData;
@@ -19,6 +20,7 @@ public class Level {
 	private int[][] lvlData;
 	private ArrayList<Crabby> crabs;
 	private ArrayList<Potion> potions;
+	private ArrayList<Spike> spikes;
 	private ArrayList<GameContainer> containers;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
@@ -31,10 +33,16 @@ public class Level {
 		createEnemies();
 		createPotions();
 		createContainers();
+		createSpikes();
 		calcLvlOffsets();
 		calcPlayerSpawn();
 	}
 	
+	private void createSpikes() {
+		spikes = HelpMethods.GetSpikes(img);
+
+	}
+
 	private void createContainers() {
 		containers = HelpMethods.GetContainers(img);
 	}
@@ -58,7 +66,7 @@ public class Level {
 	}
 
 	private void createLevelData() {
-		lvlData = getLevelData(img);
+		lvlData = GetLevelData(img);
 	}
 
 	public int getSpriteIndex(int x, int y) {
@@ -87,6 +95,10 @@ public class Level {
 
 	public ArrayList<GameContainer> getContainers() {
 		return containers;
+	}
+
+	public ArrayList<Spike> getSpikes() {
+		return spikes;
 	}
 
 }
