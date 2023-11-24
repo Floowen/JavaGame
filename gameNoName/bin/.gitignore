@@ -1,12 +1,7 @@
-/levels/
 /utils/
+/cannon_atlas.png
 /objects/
-/gamestates/
-/level_one_data.png
-/level_one_data_long.png
-/objects_sprites.png
-/potions_sprites.png
-/entities/
+/levels/
 /lvls/
-/ui/
-/trap_atlas.png
+/gamestates/
+/entities/
