@@ -1,5 +1,6 @@
-/gamestates/
-/entities/
-/death_screen.png
-/utils/
 /ui/
+/main/
+/gamestates/
+/options_background.png
+/utils/
+/inputs/
