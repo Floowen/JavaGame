@@ -1,5 +1,7 @@
 package ui;
 
+import static utils.Constants.UI.URMButtons.*;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -9,7 +11,6 @@ import gamestates.Gamestate;
 import gamestates.Playing;
 import main.Game;
 import utils.LoadSave;
-import static utils.Constants.UI.URMButtons.*;
 
 public class LevelCompletedOverlay {
 
@@ -22,7 +23,7 @@ public class LevelCompletedOverlay {
 		this.playing = playing;
 		initImg();
 		initButtons();
-	} 
+	}
 
 	private void initButtons() {
 		int menuX = (int) (330 * Game.SCALE);
@@ -33,7 +34,7 @@ public class LevelCompletedOverlay {
 	}
 
 	private void initImg() {
-		img = LoadSave.getSpriteAtlas(LoadSave.COMPLETED_IMG);
+		img = LoadSave.GetSpriteAtlas(LoadSave.COMPLETED_IMG);
 		bgW = (int) (img.getWidth() * Game.SCALE);
 		bgH = (int) (img.getHeight() * Game.SCALE);
 		bgX = Game.GAME_WIDTH / 2 - bgW / 2;
@@ -72,11 +73,13 @@ public class LevelCompletedOverlay {
 		if (isIn(menu, e)) {
 			if (menu.isMousePressed()) {
 				playing.resetAll();
-				Gamestate.state = Gamestate.MENU;
+				playing.setGamestate(Gamestate.MENU);
 			}
 		} else if (isIn(next, e))
-			if (next.isMousePressed())
+			if (next.isMousePressed()) {
 				playing.loadNextLevel();
+				playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLevelIndex());
+			}
 
 		menu.resetBools();
 		next.resetBools();

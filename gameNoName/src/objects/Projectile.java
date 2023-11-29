@@ -1,10 +1,10 @@
 package objects;
 
+import static utils.Constants.Projectiles.*;
+
 import java.awt.geom.Rectangle2D;
 
 import main.Game;
-
-import static utils.Constants.Projectiles.*;
 
 public class Projectile {
 	private Rectangle2D.Float hitbox;

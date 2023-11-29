@@ -4,10 +4,10 @@ import static utils.Constants.UI.URMButtons.URM_SIZE;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import gamestates.Gamestate;
 import gamestates.Playing;
 import main.Game;
@@ -19,9 +19,11 @@ public class GameOverOverlay {
 	private BufferedImage img;
 	private int imgX, imgY, imgW, imgH;
 	private UrmButton menu, play;
+	private AudioPlayer audioPlayer;
 
 	public GameOverOverlay(Playing playing) {
 		this.playing = playing;
+		audioPlayer = playing.getGame().getAudioPlayer();
 		createImg();
 		createButtons();
 	}
@@ -36,7 +38,7 @@ public class GameOverOverlay {
 	}
 
 	private void createImg() {
-		img = LoadSave.getSpriteAtlas(LoadSave.DEATH_SCREEN);
+		img = LoadSave.GetSpriteAtlas(LoadSave.DEATH_SCREEN);
 		imgW = (int) (img.getWidth() * Game.SCALE);
 		imgH = (int) (img.getHeight() * Game.SCALE);
 		imgX = Game.GAME_WIDTH / 2 - imgW / 2;
@@ -59,13 +61,6 @@ public class GameOverOverlay {
 		play.update();
 	}
 
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			playing.resetAll();
-			Gamestate.state = Gamestate.MENU;
-		}
-	}
-
 	private boolean isIn(UrmButton b, MouseEvent e) {
 		return b.getBounds().contains(e.getX(), e.getY());
 	}
@@ -84,11 +79,15 @@ public class GameOverOverlay {
 		if (isIn(menu, e)) {
 			if (menu.isMousePressed()) {
 				playing.resetAll();
-				Gamestate.state = Gamestate.MENU;
+				audioPlayer.stopEffect(AudioPlayer.GAMEOVER);
+				playing.setGamestate(Gamestate.MENU);
 			}
 		} else if (isIn(play, e))
-			if (play.isMousePressed())
+			if (play.isMousePressed()) {
+				audioPlayer.stopEffect(AudioPlayer.GAMEOVER);
 				playing.resetAll();
+				playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLevelIndex());
+			}
 
 		menu.resetBools();
 		play.resetBools();

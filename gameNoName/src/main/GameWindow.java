@@ -5,32 +5,34 @@ import java.awt.event.WindowFocusListener;
 
 import javax.swing.JFrame;
 
-public class GameWindow{
+public class GameWindow {
 	private JFrame jframe;
-	
-	//constructor
+
 	public GameWindow(GamePanel gamePanel) {
-		jframe = new JFrame();
-		
+
+		jframe = new JFrame("Pixel Rush");
+
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.add(gamePanel);
+		
 		jframe.setResizable(false);
 		jframe.pack();
 		jframe.setLocationRelativeTo(null);
-		jframe.setVisible(true); //always set on end
+		jframe.setVisible(true);
 		jframe.addWindowFocusListener(new WindowFocusListener() {
-			
+
 			@Override
 			public void windowLostFocus(WindowEvent e) {
 				gamePanel.getGame().windowFocusLost();
-				
 			}
-			
+
 			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
+
 	}
+
 }

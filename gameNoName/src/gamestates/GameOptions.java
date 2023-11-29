@@ -1,5 +1,7 @@
 package gamestates;
 
+import static utils.Constants.UI.URMButtons.*;
+
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -10,7 +12,6 @@ import ui.AudioOptions;
 import ui.PauseButton;
 import ui.UrmButton;
 import utils.LoadSave;
-import static utils.Constants.UI.URMButtons.*;
 
 public class GameOptions extends State implements Statemethods {
 
@@ -24,7 +25,6 @@ public class GameOptions extends State implements Statemethods {
 		loadImgs();
 		loadButton();
 		audioOptions = game.getAudioOptions();
-
 	}
 
 	private void loadButton() {
@@ -32,12 +32,11 @@ public class GameOptions extends State implements Statemethods {
 		int menuY = (int) (325 * Game.SCALE);
 
 		menuB = new UrmButton(menuX, menuY, URM_SIZE, URM_SIZE, 2);
-
 	}
 
 	private void loadImgs() {
-		backgroundImg = LoadSave.getSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
-		optionsBackgroundImg = LoadSave.getSpriteAtlas(LoadSave.OPTIONS_MENU);
+		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
+		optionsBackgroundImg = LoadSave.GetSpriteAtlas(LoadSave.OPTIONS_MENU);
 
 		bgW = (int) (optionsBackgroundImg.getWidth() * Game.SCALE);
 		bgH = (int) (optionsBackgroundImg.getHeight() * Game.SCALE);
@@ -49,7 +48,6 @@ public class GameOptions extends State implements Statemethods {
 	public void update() {
 		menuB.update();
 		audioOptions.update();
-
 	}
 
 	@Override
@@ -67,11 +65,10 @@ public class GameOptions extends State implements Statemethods {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (isIn(e, menuB))
+		if (isIn(e, menuB)) {
 			menuB.setMousePressed(true);
-		else
+		} else
 			audioOptions.mousePressed(e);
-
 	}
 
 	@Override
@@ -81,9 +78,7 @@ public class GameOptions extends State implements Statemethods {
 				Gamestate.state = Gamestate.MENU;
 		} else
 			audioOptions.mouseReleased(e);
-
 		menuB.resetBools();
-
 	}
 
 	@Override
@@ -94,7 +89,6 @@ public class GameOptions extends State implements Statemethods {
 			menuB.setMouseOver(true);
 		else
 			audioOptions.mouseMoved(e);
-
 	}
 
 	@Override

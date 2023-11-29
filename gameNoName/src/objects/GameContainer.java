@@ -33,4 +33,3 @@ public class GameContainer extends GameObject {
 			updateAnimationTick();
 	}
 }
-
