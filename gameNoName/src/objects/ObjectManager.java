@@ -21,12 +21,13 @@ public class ObjectManager {
 
 	private Playing playing;
 	private BufferedImage[][] potionImgs, containerImgs;
-	private BufferedImage[] cannonImgs, grassImgs;
+	private BufferedImage[] cannonImgs, grassImgs, explosionImg;
 	private BufferedImage[][] treeImgs;
 	private BufferedImage spikeImg, cannonBallImg;
 	private ArrayList<Potion> potions;
 	private ArrayList<GameContainer> containers;
 	private ArrayList<Projectile> projectiles = new ArrayList<>();
+	private ArrayList<Explosion> explosions = new ArrayList<>();
 
 	private Level currentLevel;
 
@@ -110,6 +111,13 @@ public class ObjectManager {
 			cannonImgs[i] = temp.getSubimage(i * 40, 0, 40, 26);
 
 		cannonBallImg = LoadSave.GetSpriteAtlas(LoadSave.CANNON_BALL);
+
+		explosionImg = new BufferedImage[7];
+		BufferedImage exp = LoadSave.GetSpriteAtlas(LoadSave.EXPLOSION);
+
+		for (int i = 0; i < explosionImg.length; i++)
+			explosionImg[i] = exp.getSubimage(i * 54, 0, 54, 60);
+
 		treeImgs = new BufferedImage[2][4];
 		BufferedImage treeOneImg = LoadSave.GetSpriteAtlas(LoadSave.TREE_ONE_ATLAS);
 		for (int i = 0; i < 4; i++)
@@ -137,6 +145,7 @@ public class ObjectManager {
 
 		updateCannons(lvlData, player);
 		updateProjectiles(lvlData, player);
+		updateExplosion();
 
 	}
 
@@ -150,11 +159,29 @@ public class ObjectManager {
 			if (p.isActive()) {
 				p.updatePos();
 				if (p.getHitbox().intersects(player.getHitbox())) {
+					explosion((int) (p.getHitbox().x), (int) (p.getHitbox().y - 30));
 					player.changeHealth(-25);
 					p.setActive(false);
-				} else if (IsProjectileHittingLevel(p, lvlData))
+				} else if (IsProjectileHittingLevel(p, lvlData)) {
+					explosion((int) (p.getHitbox().x), (int) (p.getHitbox().y - 30));
 					p.setActive(false);
+				}
+
 			}
+	}
+
+	private void explosion(int x, int y) {
+		explosions.add(new Explosion(x, y));
+	}
+
+	private void updateExplosion() {
+		for (Explosion e : explosions) {
+			if (e.isActive())
+			e.update();
+
+		if (e.getAniIndex() == 6 && e.getAniTick() == 0)
+				e.setActive(false);
+		}
 	}
 
 	private boolean isPlayerInRange(Cannon c, Player player) {
@@ -201,7 +228,15 @@ public class ObjectManager {
 		drawTraps(g, xLvlOffset);
 		drawCannons(g, xLvlOffset);
 		drawProjectiles(g, xLvlOffset);
+		drawExplosions(g, xLvlOffset);
 		drawGrass(g, xLvlOffset);
+	}
+
+	private void drawExplosions(Graphics g, int xLvlOffset) {
+		for (Explosion e : explosions) {
+			g.drawImage(explosionImg[e.getAniIndex()], (e.x - EXPLOSION_WIDTH / 2) - xLvlOffset, e.y,
+					EXPLOSION_WIDTH, EXPLOSION_HEIGHT, null);
+		}
 	}
 
 	private void drawGrass(Graphics g, int xLvlOffset) {
@@ -242,7 +277,6 @@ public class ObjectManager {
 	private void drawTraps(Graphics g, int xLvlOffset) {
 		for (Spike s : currentLevel.getSpikes())
 			g.drawImage(spikeImg, (int) (s.getHitbox().x - xLvlOffset), (int) (s.getHitbox().y - s.getyDrawOffset()), SPIKE_WIDTH, SPIKE_HEIGHT, null);
-
 	}
 
 	private void drawContainers(Graphics g, int xLvlOffset) {

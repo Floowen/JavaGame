@@ -44,8 +44,8 @@ public class Playing extends State implements Statemethods {
 	private boolean paused = false;
 
 	private int xLvlOffset;
-	private int leftBorder = (int) (0.25 * Game.GAME_WIDTH);
-	private int rightBorder = (int) (0.75 * Game.GAME_WIDTH);
+	private int leftBorder = (int) (0.45 * Game.GAME_WIDTH);
+	private int rightBorder = (int) (0.55 * Game.GAME_WIDTH);
 	private int maxLvlOffsetX;
 
 	private BufferedImage backgroundImg, bigCloud, smallCloud, shipImgs[];
@@ -358,7 +358,7 @@ public class Playing extends State implements Statemethods {
 			case KeyEvent.VK_E:
 				player.setAttacking(true);
 				break;
-			case KeyEvent.VK_R:
+			case KeyEvent.VK_Q:
 				player.powerAttack();
 				break;
 			case KeyEvent.VK_ESCAPE:

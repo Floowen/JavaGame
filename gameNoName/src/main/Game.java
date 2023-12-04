@@ -14,7 +14,7 @@ public class Game implements Runnable {
 
 	private GamePanel gamePanel;
 	private Thread gameThread;
-	private final int FPS_SET = 120;
+	private final int FPS_SET = 60;
 	private final int UPS_SET = 200;
 
 	private Playing playing;
@@ -32,7 +32,7 @@ public class Game implements Runnable {
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
-	private final boolean SHOW_FPS_UPS = true;
+	private final boolean SHOW_FPS_UPS = false;
 
 	public Game() {
 		System.out.println("size: " + GAME_WIDTH + " : " + GAME_HEIGHT);
