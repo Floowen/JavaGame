@@ -45,6 +45,7 @@ public class Constants {
 		public static final int TREE_ONE = 7;
 		public static final int TREE_TWO = 8;
 		public static final int TREE_THREE = 9;
+		public static final int EXPLOSION = 10;
 
 		public static final int RED_POTION_VALUE = 15;
 		public static final int BLUE_POTION_VALUE = 10;
@@ -69,13 +70,18 @@ public class Constants {
 		public static final int CANNON_WIDTH = (int) (CANNON_WIDTH_DEFAULT * Game.SCALE);
 		public static final int CANNON_HEIGHT = (int) (CANNON_HEIGHT_DEFAULT * Game.SCALE);
 
+		public static final int EXPLOSION_WIDTH_DEFAULT = 54;
+		public static final int EXPLOSION_HEIGHT_DEFAULT = 60;
+		public static final int EXPLOSION_WIDTH = (int) (EXPLOSION_WIDTH_DEFAULT * Game.SCALE);
+		public static final int EXPLOSION_HEIGHT = (int) (EXPLOSION_HEIGHT_DEFAULT * Game.SCALE);
+
 		public static int GetSpriteAmount(int object_type) {
 			switch (object_type) {
 			case RED_POTION, BLUE_POTION:
 				return 7;
 			case BARREL, BOX:
 				return 8;
-			case CANNON_LEFT, CANNON_RIGHT:
+			case CANNON_LEFT, CANNON_RIGHT, EXPLOSION:
 				return 7;
 			}
 			return 1;
@@ -226,6 +232,12 @@ public class Constants {
 	}
 
 	public static class UI {
+
+		public static final int LOGO_WIDTH_DEFAULT = 344;
+		public static final int LOGO_HEIGHT_DEFAULT = 148;
+		public static final int LOGO_WIDTH = (int) (LOGO_WIDTH_DEFAULT * Game.SCALE);
+		public static final int LOGO_HEIGHT = (int) (LOGO_HEIGHT_DEFAULT * Game.SCALE);
+
 		public static class Buttons {
 			public static final int B_WIDTH_DEFAULT = 140;
 			public static final int B_HEIGHT_DEFAULT = 56;

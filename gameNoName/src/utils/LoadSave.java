@@ -46,6 +46,8 @@ public class LoadSave {
 	public static final String WATER_TOP = "water_atlas_animation.png";
 	public static final String WATER_BOTTOM = "water.png";
 	public static final String SHIP = "ship.png";
+	public static final String EXPLOSION = "explode.png";
+	public static final String LOGO = "PixelRush-TItleS.png";
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
